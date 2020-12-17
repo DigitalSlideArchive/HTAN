@@ -1,0 +1,27 @@
+.g-config-breadcrumb-container
+p.g-htan-description
+  | Provides custom tools to support the HTAN project.
+form#g-htan-form(role="form")
+  .form-group
+    label(for="g-htan-assetstore") Import Assetstore
+    input#g-htan-assetstore.form-control.input-sm(
+        type="text", value=settings['htan.assetstore'] || '',
+        title="The ID of the assetstore to use for a dedicated import.")
+  .form-group
+    label(for="g-htan-import-path") Import Path
+    input#g-htan-import-path.form-control.input-sm(
+        type="text", value=settings['htan.import_path'] || '',
+        title="The path within the assetstore to import.")
+  .form-group
+    label(for="g-htan-import-folder") Import Folder
+    .input-group.input-group-sm
+      input#g-htan-import-folder.form-control.input-sm(
+          type="text", value=settings['htan.import_folder'] || '',
+          title="A folder to store imported items.")
+      .input-group-btn
+        button.g-open-browser.btn.btn-default(type="button")
+          i.icon-folder-open
+  p#g-htan-error-message.g-validation-failed-message
+.g-htan-buttons
+  button#g-htan-save.btn.btn-sm.btn-primary Save
+  button#g-htan-cancel.btn.btn-sm.btn-default Cancel
