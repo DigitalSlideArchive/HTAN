@@ -8,8 +8,8 @@ import { restRequest } from '@girder/core/rest';
 import events from '@girder/core/events';
 import router from '@girder/core/router';
 
-import ConfigViewTemplate from 'ConfigView.pug';
-import 'ConfigView.styl';
+import ConfigViewTemplate from './ConfigView.pug';
+import './ConfigView.styl';
 
 /**
  * Show the default quota settings for users and collections.

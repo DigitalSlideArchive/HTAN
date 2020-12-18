@@ -5,11 +5,11 @@ import { registerPluginNamespace } from '@girder/core/pluginUtils';
 import { exposePluginConfig } from '@girder/core/utilities/PluginUtils';
 
 // expose symbols under girder.plugins
-import * as htan from '@girder/htan';
+import * as htan from '@girder/htan_girder';
 
-import ConfigView from './views/body/ConfigView';
+import ConfigView from './views/ConfigView';
 
-const pluginName = 'htan';
+const pluginName = 'htan_girder';
 const configRoute = `plugins/${pluginName}/config`;
 
 registerPluginNamespace(pluginName, htan);

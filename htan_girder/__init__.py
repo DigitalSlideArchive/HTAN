@@ -4,6 +4,7 @@ from girder.models.folder import Folder
 from girder.utility import setting_utilities
 
 from .constants import PluginSettings
+from .rest import HTANResource
 
 
 @setting_utilities.validator(PluginSettings.HTAN_ASSETSTORE)
@@ -11,7 +12,7 @@ def validateHTANAssetstore(doc):
     if not doc.get('value', None):
         doc['value'] = None
     else:
-        Assetstore().load(doc['value'], force=True, exc=True)
+        Assetstore().load(doc['value'], exc=True)
 
 
 @setting_utilities.validator(PluginSettings.HTAN_IMPORT_PATH)
@@ -35,5 +36,4 @@ class GirderPlugin(plugin.GirderPlugin):
     CLIENT_SOURCE_PATH = 'web_client'
 
     def load(self, info):
-        # add plugin loading logic here
-        pass
+        info['apiRoot'].htan = HTANResource()
