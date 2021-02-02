@@ -1,26 +1,74 @@
+//-
+  htan.import_list
 .g-config-breadcrumb-container
 p.g-htan-description
   | Provides custom tools to support the HTAN project.
-form#g-htan-form(role="form")
-  .form-group
-    label(for="g-htan-assetstore") Import Assetstore
-    input#g-htan-assetstore.form-control.input-sm(
-        type="text", value=settings['htan.assetstore'] || '',
-        title="The ID of the assetstore to use for a dedicated import.")
-  .form-group
-    label(for="g-htan-import-path") Import Path
-    input#g-htan-import-path.form-control.input-sm(
-        type="text", value=settings['htan.import_path'] || '',
-        title="The path within the assetstore to import.")
-  .form-group
-    label(for="g-htan-import-folder") Import Folder
-    .input-group.input-group-sm
-      input#g-htan-import-folder.form-control.input-sm(
-          type="text", value=settings['htan.import_folder'] || '',
-          title="A folder to store imported items.")
-      .input-group-btn
-        button.g-open-browser.btn.btn-default(type="button")
-          i.icon-folder-open
+form#g-htan-form(role='form')
+  table
+    tr
+      th
+      th Name
+      th Description
+      th Import Assetstore ID
+      th Import Path
+      th Import Folder
+      th Include RegEx
+      th Exclude RegEx
+      th End Function
+    -
+      var importList = settings['htan.import_list'] ? JSON.parse(settings['htan.import_list']) : []
+      importList.push({})
+    for row, idx in importList
+      tr(class=idx + 1 !== importList.length ? 'htan-entry' : 'htan-empty-row')
+        td
+          button.g-htan-delete.btn.btn-sm.btn-warning(title='Remove assetstore entry')
+            i.icon-trash
+          button.g-htan-add.btn.btn-sm.btn-warning(title='Add another row')
+            i.icon-plus
+        td
+          input.g-htan-key.form-control.input-sm(
+              htan_prop='key',
+              type='text', value=row.key || '',
+              title='A short name used to trigger the import.')
+        td
+          input.g-htan-desc.form-control.input-sm(
+              htan_prop='desc',
+              type='text', value=row.desc || '',
+              title='A description of this entry.')
+        td
+          input.g-htan-assetstore-id.form-control.input-sm(
+              htan_prop='assetstoreId',
+              type='text', value=row.assetstoreId || '',
+              title='The ID of the assetstore to use for import.')
+        td
+          input.g-htan-importPath.form-control.input-sm(
+              htan_prop='importPath',
+              type='text', value=row.importPath || '',
+              title='The path within the assetstore to import.')
+        td
+          .input-group.input-group-sm
+            input.g-htan-destinationId.form-control.input-sm(
+                htan_prop='destinationId',
+                type='text', value=row.destinationId || '',
+                title='A folder to store import items.')
+            .input-group-btn
+              button.g-open-browser.btn.btn-default(type='button')
+                i.icon-folder-open
+        td
+          input.g-htan-fileIncludeRegex.form-control.input-sm(
+              htan_prop='fileIncludeRegex',
+              type='text', value=row.fileIncludeRegex || '',
+              title='If set, only filenames matching this regular expression will be imported.')
+        td
+          input.g-htan-fileExcludeRegex.form-control.input-sm(
+              htan_prop='fileExcludeRegex',
+              type='text', value=row.fileExcludeRegex || '',
+              title='If set, only filenames that do not match this regular expression will be imported.  If a filename matches the include and exclude regex, it will be excluded.')
+        td
+          input.g-htan-endFunction.form-control.input-sm(
+              htan_prop='endFunction',
+              type='text', value=row.endFunction || '',
+              title='If set, a python module and function to call after import.')
   p#g-htan-error-message.g-validation-failed-message
 .g-htan-buttons
   button#g-htan-save.btn.btn-sm.btn-primary Save

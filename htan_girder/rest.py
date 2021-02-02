@@ -10,12 +10,13 @@ class HTANResource(Resource):
         super().__init__()
         self.resourceName = 'htan'
 
-        self.route('POST', ('reimport', ), self.reimportData)
+        self.route('POST', ('reimport', ':key'), self.reimportData)
 
     @autoDescribeRoute(
         Description('Reimport a folder to an assetstore based on settings.')
+        .param('key', 'The key to reimport.', paramType='path')
     )
     @access.public
-    def reimportData(self):
-        reimportData()
+    def reimportData(self, key):
+        reimportData(key)
         return 'acknowledged'
