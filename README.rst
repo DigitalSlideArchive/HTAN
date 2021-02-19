@@ -20,3 +20,6 @@ During development, easiest way is to first enter the dsa_girder instance
    git clone https://github.com/DigitalSlideArchive/HTAN.git
    cd HTAN
    pip install -e .
+   girder build --dev
+   
+   
